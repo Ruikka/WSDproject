@@ -13,6 +13,14 @@ const requestTimingMiddleware = async({ request }, next) => {
   await next();
   const ms = Date.now() - start;
   console.log(`${request.method} ${request.url.pathname} - ${ms} ms`);
+  //logs also user id or anon is not authenitaceted
+}
+
+const authenticationMiddleware = async(context, next) => {
+  if (!context.request.url.pathname.startsWith('/auth')) {
+    //require that user is authenticated. If not, redirect to login form at /auth/login
+  }
+  
 }
 
 const serveStaticFilesMiddleware = async(context, next) => {

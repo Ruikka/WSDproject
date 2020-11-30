@@ -8,17 +8,19 @@ CREATE UNIQUE INDEX ON users((lower(email)));
 
 CREATE TABLE morning_reports (
   id SERIAL PRIMARY KEY,
+  date DATE,
   sleepDuration DOUBLE NOT NULL,
-  sleepQuality INT NOT NULL,
-  genericMood INT NOT NULL
+  sleepQuality DECIMAL NOT NULL,
+  genericMood INTEGER NOT NULL
 );
 
 CREATE TABLE evening_reports (
   id SERIAL PRIMARY KEY,
-  sportsDuration DOUBLE NOT NULL,
-  studyDuration DOUBLE NOT NULL,
-  eatingRegularity INT NOT NULL,
-  eatingQuality INT NOT NULL,
-  genericMood INT NOT NULL
+  date DATE,
+  sportsDuration DECIMAL NOT NULL,
+  studyDuration DECIMAL NOT NULL,
+  eatingRegularity INTEGER NOT NULL,
+  eatingQuality INTEGER NOT NULL,
+  genericMood INTEGER NOT NULL
 );
 
