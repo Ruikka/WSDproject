@@ -1,5 +1,6 @@
 import { executeQuery } from "../../database/database.js";
-import { validate, required, numberBetween, isNumber, isInt, isDate, match } from '../../deps.js'
+import { validate, required, numberBetween, isNumber, isInt, isDate } from '../../deps.js'
+import {getWeekSummary, getMonthSummary,} from '../../services/summaryService.js'
 
 const root = ({render}) => {
   render('rootView.ejs')
@@ -13,11 +14,12 @@ const getMorningReport = ({render}) => {
   render('morningView.ejs')
 };
 
-const postMorningReport = async({request, response}) => {
+const postMorningReport = async({request, response, render, session}) => {
+  //const user = await session.get('user');
+  const user_id = 1 //user.id
+
   const body = request.body();
   const params = await body.value;
-  
-  const user_id = 1
 
   const date = params.get('date')
   const hours_slept = Number(params.get('hours_slept'));
@@ -60,19 +62,21 @@ const postMorningReport = async({request, response}) => {
       mood,
       user_id
     );
-    response.redirect('/')
+    await session.set('msg', `Your morning report for the date '${date}' has been changed`)
+    //response.redirect('/')
   } else {
   await executeQuery("INSERT INTO morning_reports (date, hours_slept, sleep_quality, mood, user_id) VALUES ($1, $2, $3, $4, $5);", date, hours_slept, sleep_quality, mood, user_id);
-
-  response.redirect('/')
+  await session.set('msg', `Your morning report for the date '${date}' has been changed successfully`)
+  //response.redirect('/')
   }
+  response.redirect('/')
 }
 
 const getEveningReport = ({render}) => {
   render('eveningView.ejs')
 };
 
-const postEveningReport = async({request, response}) => {
+const postEveningReport = async({request, response, render}) => {
   const body = request.body();
   const params = await body.value;
   
@@ -124,13 +128,31 @@ const postEveningReport = async({request, response}) => {
       mood,
       user_id
     );
-    response.redirect('/')
+    await session.set('msg', `Your evening report for the date '${date}' has been changed`)
+   // response.redirect('/')
   } else {
   await executeQuery("INSERT INTO evening_reports (date, sports_time, study_time, eating, mood, user_id) VALUES ($1, $2, $3, $4, $5, $6);", date, sports_time, study_time, eating, mood, user_id);
-
-  response.redirect('/')
+  await session.set('msg', `Your morning report for the date '${date}' has been set successfully`)
+  //response.redirect('/')
   }
 }
 
+const getSummaryView= async({render}) => {
+  render('summaryView.ejs')
+}
 
-export { root, getBehaviorReport, getMorningReport, postMorningReport, getEveningReport, postEveningReport };
+const getWeeklySummary = async({render, session}) => {
+  const user = await session.get('user');
+  const user_id = user.id
+
+  const date = new Date()
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+  var week = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  var year = date.getFullYear()
+  const summary = await getUserWeekSummary(user_id, year, week)
+  render('summaryView.ejs', {...summary, year: year, week: week})
+}
+
+
+export { root, getBehaviorReport, getMorningReport, postMorningReport, getEveningReport, postEveningReport, getSummaryView, getWeeklySummary };

@@ -1,29 +1,36 @@
-<h2> Login </h2>
-<p> Click here to log in</p>
-<form method="GET" action="auth/login">
-    <input type="submit" value="Login" />
-</form>
+<%- include('./partials/header.ejs') %>
 
-<h2> Register </h2>
-<p> Not registered? Register here!</p>
-<form method="GET" action="auth/registration">
-    <input type="submit" value="register" />
-</form>
+<div class="container">
 
-<h1> Application for self-monitoring!</h1>
+    <h2> Login </h2>
+    <p> Click here to log in</p>
+    <form method="GET" action="auth/login">
+        <input type="submit" value="Login" />
+    </form>
 
-<h2> Quick Summary </h2>
-<p> there's nothing here... </p>
+    <h2> Register </h2>
+    <p> Not registered? Register here!</p>
+    <form method="GET" action="auth/registration">
+        <input type="submit" value="register" />
+    </form>
 
-<h2> Reporting </h2>
-<p> Click here to report your data</p>
-<form method="GET" action="behavior/reporting">
-    <input type="submit" value="Report" />
-</form>
+    <h1> Application for self-monitoring!</h1>
 
-<h2> Summary </h2>
-<p> Click here to see a summary fo your data</p>
-<form method="GET" action="behavior/summary">
-    <input type="submit" value="Summary" />
-</form>
+    <h2> Quick Summary </h2>
+    <p> there's nothing here... </p>
+
+    <h2> Reporting </h2>
+    <p> Click here to report your data</p>
+    <form method="GET" action="behavior/reporting">
+        <input type="submit" value="Report" />
+    </form>
+
+    <h2> Summary </h2>
+    <p> Click here to see a summary of your data</p>
+    <form method="GET" action="behavior/summary">
+        <input type="submit" value="Summary" />
+    </form>
+</div>
+
+<%- include('./partials/footer.ejs') %>
 

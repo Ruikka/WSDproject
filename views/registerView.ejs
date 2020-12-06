@@ -1,14 +1,44 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="container">
+
 <form method="GET" action="/">
     <input type="submit" value="Back to main page" />
 </form>
 
+<% 
+  var errors = errors ? errors : []
+  var email = email ? email: ""
+
+  var password = password ? password : ""
+  var verification = verification ? verification : ""
+%>
+
 <h1> Register </h1>
 
-<p> Type in your username and password to register. Verify the password by typing it again </p>
+<h2> Type in your username and password to register. Verify the password by typing it again </h2>
 
-<form method="POST">
-    <input type="text" name="username" />
-    <input type="password" name="password" />
-    <input type="password" name="verify password" />
-    <input type="submit" value="Register!" />
-</form>
+<form method="POST" action="/auth/registration">
+    <label for="email">Email</label>
+    <input type="email" name="email" value="<%= email %>" />
+    <%- include('partials/error.ejs', { errors: errors, attribute: 'email'}) %>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" name="password" value="<%= password %>" />
+    <%- include('partials/error.ejs', { errors: errors, attribute: 'password'}) %>
+
+    <label for="verification">Verify the password </label>
+    <input type="password" name="verification" value="<%= verification %>" />
+    <%- include('partials/error.ejs', { errors: errors, attribute: 'verification'}) %>
+    
+    <input type="submit" value="Submit" />
+  </form>
+
+  <h3>Already have an account? Login here!</h3>
+  <form method="GET" action="/auth/login">
+    <input type="submit" value="Login" />
+  </form>
+
+</div>
+
+<%- include('partials/footer.ejs') %>

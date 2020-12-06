@@ -1,6 +1,6 @@
-<form method="GET" action="/">
-    <input type="submit" value="Back to main page" />
-</form>
+<%- include('./partials/header.ejs') %>
+
+<div class="container">
 
 <% 
 var d = new Date()
@@ -23,10 +23,11 @@ var trueDate = d.getFullYear()+"-"+month+"-"+day
 
 //syntax: if x then x else y
 var date = date ? date : trueDate 
-var sports_time = sports_time ? sports_time: 0
-var study_time = study_time ? study_time: 0
+var sports_time = sports_time ? sports_time: null
+var study_time = study_time ? study_time: null
 var eating = eating ? eating : 3
 var mood = mood ? mood : 3
+var errors = errors ? errors : []
 %>
 
 
@@ -41,14 +42,14 @@ var mood = mood ? mood : 3
     <br>
 
     <label for="sports_time">Hours spent in sports and excecise</label>
-    <input type="text" name="sports_time" min="0" max="24" step="0.01" value="<%= sports_time %>" />
+    <input type="number" name="sports_time" min="0" max="24" step="0.01" value="<%= sports_time %>" />
     <br>
 
     <label for="study_time">Hours spent studying</label>
-    <input type="text" name="study_time" min="0" max="24" step="0.01" value="<%= study_time %>" />
+    <input type="number" name="study_time" min="0" max="24" step="0.01" value="<%= study_time %>" />
     <br>
 
-    <label for="eating">Regularity and quality of eating: give a number from 1 to 5</label>
+    <label for="eating">Regularity and quality of eating: give a number from 1 to 5 with 1 being poor and 5 being excellent</label>
     <br>1<input type="range" name="eating" min="1" max="5" step="1" value="<%= eating %>" />5</br>
 
     <label for="mood">Generic mood: give a number from 1 to 5 with 1 being poor and 5 being excellent</label>
@@ -57,3 +58,7 @@ var mood = mood ? mood : 3
     <input type="submit" value="submit all" />
 
 </form>
+
+</div>
+
+<%- include('./partials/footer.ejs') %>
