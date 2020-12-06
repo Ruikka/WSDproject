@@ -1,10 +1,51 @@
 import { executeQuery } from '../../database/database.js'
 import { bcrypt } from '../../deps.js'
-import { validate, required, isEmail, minLength, match } from '../../deps.js'
+import { validate, required, isEmail, minLength} from '../../deps.js'
 
 const getLogin = async({render}) => {
     render('loginView.ejs')
 };
+
+const postLogin = async({request, response, render, session}) => {
+  const body = request.body();
+  const params = await body.value;
+
+  const email = params.get('email');
+  const password = params.get('password');
+
+  // check if the user with the given email exists in the database
+  const exists = await executeQuery("SELECT * FROM users WHERE email = $1;", email);
+  if (exists.rowCount === 0) {
+    render('/loginView.ejs', {email: email, errors: "Invalid email or password"})
+    return;
+  }
+
+  // take the first row from the results
+  const userO = exists.rowsOfObjects()[0];
+
+  const hash = userO.password;
+
+  const CorrectPassword = await bcrypt.compare(password, hash);
+  if (!CorrectPassword) {
+    render('/loginView.ejs', {email: email, errors: "Invalid email or password"})
+    return;
+  }
+
+  await session.set('authenticated', true);
+  await session.set('user', {
+    id: userO.id,
+    email: userO.email
+  });
+  await session.set('msg', 'Login successful')
+  response.redirect('/')
+};
+
+const postLogout = async({response, session}) => {
+  await session.set('authenticated', false);
+  await session.set('user', undefined);
+  response.redirect('/auth/login')
+};
+
 
 const getRegistration = async({render}) => {
     render('registerView.ejs')
@@ -61,7 +102,11 @@ const getRegistration = async({render}) => {
     //must not store the plaintext password, hence hash
     const hash = await bcrypt.hash(password);
     await executeQuery("INSERT INTO users (email, password) VALUES ($1, $2);", email, hash);
-    response.redirect('/')
+    response.redirect('/auth/registrationSuccessful')
 };
 
-export {getLogin, getRegistration, postRegistration}
+const registrationSuccessful = async({render}) => {
+  render('registrationSuccessView.ejs');
+};
+
+export {getLogin, getRegistration, postRegistration, postLogin, postLogout, registrationSuccessful}

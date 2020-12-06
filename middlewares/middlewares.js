@@ -17,9 +17,17 @@ const requestTimingMiddleware = async({ request }, next) => {
 }
 
 const authenticationMiddleware = async(context, next) => {
-  if (!context.request.url.pathname.startsWith('/auth')) {
-    //require that user is authenticated. If not, redirect to login form at /auth/login
+  /**if (!context.request.url.pathname.startsWith('/auth')) {
+    if (session && await session.get('authenticated')) {
+      await next();
+    } else {
+      response.status = 401;
+    }
+  } else {
+    await next();
   }
+    //require that user is authenticated. If not, redirect to login form at /auth/login
+  }*/
   
 }
 
@@ -36,4 +44,4 @@ const serveStaticFilesMiddleware = async(context, next) => {
   }
 }
 
-export { errorMiddleware, requestTimingMiddleware, serveStaticFilesMiddleware };
+export { errorMiddleware, requestTimingMiddleware, serveStaticFilesMiddleware};

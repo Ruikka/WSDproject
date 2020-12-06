@@ -1,0 +1,13 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="container">
+
+    <h2>Registration successful!</h2>
+
+    <h4>You can now log in and start using the app</h4>
+    <form method="GET" action="/auth/login">
+      <input type="submit" value="Login" />
+    </form>
+</div>
+
+<%- include('./partials/footer.ejs') %>
