@@ -19,6 +19,7 @@ app.use(session.use()(session));
 app.use(MW.errorMiddleware)
 app.use(MW.requestTimingMiddleware)
 app.use(MW.serveStaticFilesMiddleware)
+app.use(MW.authenticationMiddleware)
 
 app.use(router.routes());
 

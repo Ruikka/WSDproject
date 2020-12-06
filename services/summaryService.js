@@ -184,7 +184,7 @@ const noMorningData = {
 
   //get a spesific users mood from a spesific day
   const getMood = async(user_id, year, month, day) => {
-    var date = getDateFormated(year, month, day)
+    var date = getDate(year, month, day)
     var moodAVG = await executeQuery("SELECT AVG(mood)::numeric(10,2) as overall_average_mood FROM (SELECT mood, date FROM morning_reports WHERE user_id = $2 UNION SELECT mood, date FROM evening_reports WHERE user_id = $2) as something WHERE date =  $1", date, user_id);
     if (!moodAVG || moodAVG.rowCount === 0) {
         moodAVG = {overall_average_mood: null}

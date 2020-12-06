@@ -14,18 +14,16 @@ router.get('/behavior/reporting/evening', behaviorContr.getEveningReport); //eve
 router.post('/behavior/reporting/morning', behaviorContr.postMorningReport); //posting morning report 
 router.post('/behavior/reporting/evening', behaviorContr.postEveningReport); //posting evening report
 
-router.get('/auth/login', authContr.getLogin); //login form accessible from here
 router.get('/auth/registration', authContr.getRegistration) //registration accessible from here
 router.post('/auth/registration', authContr.postRegistration) //registers user
-router.get('/auth/registrationSuccessful', authContr.registrationSuccessful)
+router.get('/auth/registrationSuccessful', authContr.registrationSuccessful) //confirms a successful registration and offers login
 
-router.get('/auth/login', authContr.getLogin)
-router.post('/auth/login', authContr.postLogin)
+router.get('/auth/login', authContr.getLogin); //login form accessible from here
+router.post('/auth/login', authContr.postLogin) //logs user in 
 
 router.post('/auth/logout', authContr.postLogout)
 
 //router.get('/behavior/summary', behaviorContr.getWeeklySummary);
 //router.get('/auth/logout', getLogout); //logout button is here
-//router.post('/auth/logout', helloApi.setHello); //logs user out
 
 export { router };

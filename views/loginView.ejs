@@ -2,10 +2,6 @@
 
 <div class="container">
 
-<form method="GET" action="/">
-    <input type="submit" value="Back to main page" />
-</form>
-
 <%
 var errors = errors ? errors : []
 %>
@@ -18,7 +14,9 @@ var errors = errors ? errors : []
     <br>
     <label for="password">Password</label>
     <input type="password" name="password" />
-    <%- include('partials/error.ejs', { errors: errors, attribute: 'email'}) %>
+    <% if (errors.length > 0) { %>
+        <p><%= errors %></p>
+    <% } %>
     
     <input type="submit" value="Login" />
 </form>

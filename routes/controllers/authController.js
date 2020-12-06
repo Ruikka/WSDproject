@@ -16,7 +16,7 @@ const postLogin = async({request, response, render, session}) => {
   // check if the user with the given email exists in the database
   const exists = await executeQuery("SELECT * FROM users WHERE email = $1;", email);
   if (exists.rowCount === 0) {
-    render('/loginView.ejs', {email: email, errors: "Invalid email or password"})
+    render('/loginView.ejs', {errors: "Invalid email or password"})
     return;
   }
 
@@ -27,7 +27,7 @@ const postLogin = async({request, response, render, session}) => {
 
   const CorrectPassword = await bcrypt.compare(password, hash);
   if (!CorrectPassword) {
-    render('/loginView.ejs', {email: email, errors: "Invalid email or password"})
+    render('/loginView.ejs', {errors: "Invalid email or password"})
     return;
   }
 

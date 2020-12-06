@@ -16,18 +16,17 @@ const requestTimingMiddleware = async({ request }, next) => {
   //logs also user id or anon is not authenitaceted
 }
 
-const authenticationMiddleware = async(context, next) => {
-  /**if (!context.request.url.pathname.startsWith('/auth')) {
+const authenticationMiddleware = async({session, response, request}, next ) => {
+  if (!request.url.pathname.startsWith('/auth')) {
     if (session && await session.get('authenticated')) {
       await next();
     } else {
-      response.status = 401;
+      response.redirect('/auth/login')
     }
   } else {
     await next();
   }
     //require that user is authenticated. If not, redirect to login form at /auth/login
-  }*/
   
 }
 
@@ -44,4 +43,4 @@ const serveStaticFilesMiddleware = async(context, next) => {
   }
 }
 
-export { errorMiddleware, requestTimingMiddleware, serveStaticFilesMiddleware};
+export { errorMiddleware, requestTimingMiddleware, serveStaticFilesMiddleware, authenticationMiddleware};

@@ -7,7 +7,7 @@
     %>
 
     <% if (msg.length > 0) { %>
-      <h2 class="message">Message: <%= msg %></h2>
+      <h2 class="message"> <%= msg %></h2>
     <% } %>
 
     <h2> Login </h2>
@@ -24,8 +24,15 @@
 
     <h1> Application for self-monitoring!</h1>
 
-    <h2> Quick Summary </h2>
-    <p> There's nothing here... </p>
+    <h3>Quick summary</h3>
+    <% if (average_mood_today && average_mood_yesterday) { %>
+      <p>Average mood for today (1=poor, 5=excellent): <%= average_mood_today %></p>
+      <p>Average mood for yesterday (1=poor, 5=excellent): <%= average_mood_yesterday %></p>
+      <p><%= average_mood_yesterday > average_mood_today ? "Things are looking gloomy today" : "Things are looking bright today" %></p>
+    <% } else { %>
+      <p>Not enough data for a quick summary.</p>
+    <% } %>
+    <br>
 
     <h2> Reporting </h2>
     <p> Click here to report your data</p>
