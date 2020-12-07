@@ -16,7 +16,7 @@
 
 <h1> Register </h1>
 
-<h2> Type in your username and password to register. Verify the password by typing it again </h2>
+<h3> Type in your username and password to register. Verify the password by typing it again </h3>
 
 <form method="POST" action="/auth/registration">
     <label for="email">Email</label>
@@ -31,7 +31,7 @@
     <input type="password" name="verification" value="<%= verification %>" />
     <%- include('partials/error.ejs', { errors: errors, attribute: 'verification'}) %>
     
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Register" />
   </form>
 
   <h3>Already have an account? Login here!</h3>

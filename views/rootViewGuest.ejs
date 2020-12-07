@@ -1,0 +1,31 @@
+<%- include('./partials/header.ejs') %>
+
+<div class="container">
+
+    <h1> Welcome to this self-monitoring application!</h1>
+    <p> The purpose of this application is to monitor your daily activity, sleep and well-being</p>
+
+    <h3> New user? Register here!</h3>
+    <form method="GET" action="/auth/registration">
+    <input type="submit" value="Register" />
+    </form>
+
+    <h3> Already registered? Login here!</h3>
+    <form method="GET" action="/auth/login">
+      <input type="submit" value="Login" />
+    </form>
+
+
+    <h3> Reporting </h3>
+    <p> Click here to report your data</p>
+    <form method="GET" action="behavior/reporting">
+        <input type="submit" value="Report" />
+    </form>
+
+    <h3>Quick summary of your data. Log in so you can see it!</h3>
+      <p>Average mood for today (1=poor, 5=excellent): your data shown here... </p>
+      <p>Average mood for yesterday (1=poor, 5=excellent): your data shown here... </p>
+      <p> Overall trend of mood shown here... </p>
+    <br>
+
+<%- include('./partials/footer.ejs') %>

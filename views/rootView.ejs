@@ -6,13 +6,17 @@
     var msg = msg ? msg : ''
     %>
 
+    <form method="POST" action="/auth/logout">
+      <input type="submit" value="Logout" />
+    </form>
+
     <% if (msg.length > 0) { %>
-      <h2 class="message"> <%= msg %></h2>
+      <h3 class="message"> <%= msg %></h3>
     <% } %>
 
-    <h1> Application for self-monitoring!</h1>
+    <h1> Welcome to this self-monitoring Application!</h1>
 
-    <h3>Quick summary</h3>
+    <h3>Personal quick summary</h3>
     <% if (average_mood_today && average_mood_yesterday) { %>
       <p>Average mood for today (1=poor, 5=excellent): <%= average_mood_today %></p>
       <p>Average mood for yesterday (1=poor, 5=excellent): <%= average_mood_yesterday %></p>
@@ -22,13 +26,13 @@
     <% } %>
     <br>
 
-    <h2> Reporting </h2>
+    <h3> Reporting </h3>
     <p> Click here to report your data</p>
     <form method="GET" action="behavior/reporting">
         <input type="submit" value="Report" />
     </form>
 
-    <h2> Summary </h2>
+    <h3> Summary </h3>
     <p> Click here to see a summary of your data</p>
     <form method="GET" action="behavior/summary">
         <input type="submit" value="Summary" />
