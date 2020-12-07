@@ -12,23 +12,26 @@
 
 <h1> Summary </h1>
 
-<p> Which summary would you like to see? </p>
-
 <h3>Personal weekly summary of the week <%= week %> of <%= year %></h3>
-<p>Average sleep duration (hours): <%= average_sleep_duration ? average_sleep_duration : "No data" %></p>
+<p>Average sleep duration (hours): <%= average_hours_slept ? average_hours_slept : "No data" %></p>
 <p>Average sleep quality (1=poor, 5=excellent): <%= average_sleep_quality ? average_sleep_quality : "No data" %></p>
 <p>Average time spent on sports and exercise (hours): <%= average_sports_time ? average_sports_time : "No data" %></p>
 <p>Average time spent studying (hours): <%= average_study_time ? average_study_time : "No data" %></p>
 <p>Average regularity and quality of eating (1=poor, 5=excellent): <%= average_eating_quality ? average_eating_quality : "No data" %></p>
-<p>Average generic mood for the whole day (1=poor, 5=excellent): <%= average_mood_whole_day ? average_mood_whole_day : "No data" %></p>
-<p>Average generic mood for the morning (1=poor, 5=excellent): <%= average_mood_morning ? average_mood_morning : "No data" %></p>
-<p>Average generic mood for the evening (1=poor, 5=excellent): <%= average_mood_evening ? average_mood_evening : "No data" %></p>
+<p>Average generic mood for the whole day (1=poor, 5=excellent): <%= overall_average_mood? overall_average_mood : "No data" %></p>
+<p>Average generic mood for the morning (1=poor, 5=excellent): <%= overall_average_mood? overall_average_mood : "No data" %></p>
+<p>Average generic mood for the evening (1=poor, 5=excellent): <%= overall_average_mood ? overall_average_mood : "No data" %></p>
 <br>
 
 <h3>Change the week of the summary here</h3>
-<form method="POST" action="/behavior/summary/weekly">
+<form method="POST" action="/behavior/summary">
   <input type="week" name="week" value=<%= year+"-W"+week %> %> />
   <input type="submit" value="Change week" />
+</form>
+
+<h3>Click here to see your monthly summary</h3>
+<form method="GET" action="/behavior/summary/monthly">
+  <input type="submit" value="Monthly summary" />
 </form>
 
 </div>

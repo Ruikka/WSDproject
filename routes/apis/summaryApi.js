@@ -4,8 +4,8 @@ const summary = async({response}) => {
     response.body = await getSummary()
 };
 
-const day_summary = async({response, params}) => {
+const daySummary = async({response, params}) => {
     response.body = await getSummaryDate(params.year, params.month, params.day)
 };
    
-export { summary, day_summary };
+export { summary, daySummary };

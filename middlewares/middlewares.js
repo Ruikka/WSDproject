@@ -8,16 +8,24 @@ const errorMiddleware = async(context, next) => {
   }
 }
 
-const requestTimingMiddleware = async({ request }, next) => {
+const requestTimingMiddleware = async({ request, session }, next) => {
+  var userId = 'anonymous'
+  if (session && await session.get('authenticated')) {
+    var user = await session.get('user')
+    userId = user.id
+  }
+
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
-  console.log(`${request.method} ${request.url.pathname} - ${ms} ms`);
+  console.log(`${request.method} ${request.url.pathname} - ${ms} ms - ${userId} id`);
   //logs also user id or anon is not authenitaceted
 }
 
 const authenticationMiddleware = async({session, response, request}, next ) => {
-  if (!request.url.pathname.startsWith('/auth')) {
+
+
+  if (request.url.pathname.startsWith('/behavior')) {
     if (session && await session.get('authenticated')) {
       await next();
     } else {

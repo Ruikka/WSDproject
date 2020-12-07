@@ -155,9 +155,65 @@ const getWeeklySummary = async({render, session}) => {
   const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
   var week = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
   var year = date.getFullYear()
-  const summary = await getUserWeekSummary(user_id, year, week)
+  const summary = await getWeekSummary(user_id, year, week)
   render('summaryView.ejs', {...summary, year: year, week: week})
 }
 
+const postWeeklySummary = async({request, render, session}) => {
+  const user = await session.get('user');
+  const user_id = user.id
+  const body = request.body()
+  const params = await body.value
 
-export { getBehaviorReport, getMorningReport, postMorningReport, getEveningReport, postEveningReport, getSummaryView, getWeeklySummary };
+  const date = new Date()
+  const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+  const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+  var week = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+  var year = date.getFullYear()
+
+  if (params.has('week')) {
+    const yyyy_Www = params.get('week')
+    year = Number(yyyy_Www.slice(0,4))
+    week = Number(yyyy_Www.slice(6,8))
+  }
+
+  const summary = await getWeekSummary(user_id, year, week)
+  render('summaryView.ejs', {...summary, year: year, week: week})
+}
+
+const getMonthlySummary = async({render, session}) => {
+  const user = await session.get('user');
+  const user_id = user.id
+  const date = new Date()
+  const month = date.getMonth() < 9 
+              ? '0' + (date.getMonth() + 1) 
+              : (date.getMonth() + 1)
+  const year = date.getFullYear()
+  const summary = await getMonthSummary(user_id, year, month)
+  render('monthSummaryView.ejs', {...summary, year: year, month: month})
+}
+
+const postMonthlySummary = async({request, render, session}) => {
+  const user = await session.get('user');
+  const user_id = user.id
+  const body = request.body()
+  const params = await body.value
+
+  const date = new Date()
+  var month = date.getMonth() < 9 
+              ? '0' + (date.getMonth() + 1) 
+              : (date.getMonth() + 1)
+  var year = date.getFullYear()
+
+  if (params.has('month')) {
+    const yyyy_mm = params.get('month')
+    year = Number(yyyy_mm.slice(0,4))
+    month = Number(yyyy_mm.slice(5,7))
+  }
+  
+  const summary = await getMonthSummary(user_id, year, month)
+  render('monthSummaryView.ejs', {...summary, year: year, month: month})
+}
+
+
+export { getBehaviorReport, getMorningReport, postMorningReport, getEveningReport, postEveningReport, getSummaryView, getWeeklySummary, getMonthlySummary, postWeeklySummary, postMonthlySummary };

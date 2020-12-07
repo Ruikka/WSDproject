@@ -21,9 +21,14 @@ router.get('/auth/registrationSuccessful', authContr.registrationSuccessful) //c
 router.get('/auth/login', authContr.getLogin); //login form accessible from here
 router.post('/auth/login', authContr.postLogin) //logs user in 
 
-router.post('/auth/logout', authContr.postLogout)
+router.post('/auth/logout', authContr.postLogout) //logs user out
 
-//router.get('/behavior/summary', behaviorContr.getWeeklySummary);
-//router.get('/auth/logout', getLogout); //logout button is here
+router.get('/behavior/summary', behaviorContr.getWeeklySummary); //shows weekly summary
+router.post('/behavior/summary', behaviorContr.postWeeklySummary); //changes week
+router.get('/behavior/summary/monthly', behaviorContr.getMonthlySummary) //shows monthly summary
+router.post('/behavior/summary/monthly', behaviorContr.postMonthlySummary) //changes month
+
+router.get('/api/summary', summaryApi.summary); //api
+router.get('/api/summary/:year/:month/:day', summaryApi.daySummary); //api
 
 export { router };
