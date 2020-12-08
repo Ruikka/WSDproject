@@ -52,3 +52,8 @@ CREATE TABLE evening_reports (
   user_id INTEGER REFERENCES users(id)
 );
 ```
+
+### Other notes
+
+- Duplicate evening or morning reports update the old report instead of removing the old one and making a new one
+- All paths starting with "/auth" are accessible to everyone, EXCEPT "/auth/registrationSuccessful" because it just confirms a successful registration so it would make no sense to make it available for unregistered users.
