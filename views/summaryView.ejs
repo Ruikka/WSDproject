@@ -5,22 +5,14 @@
 <form method="GET" action="/">
     <input type="submit" value="Back to main page" />
 </form>
-<form method="POST" action="/auth/logout">
-    <input type="submit" value="Logout" />
-</form>
-
-
-<h1> Summary </h1>
 
 <h3>Personal weekly summary of the week <%= week %> of <%= year %></h3>
 <p>Average sleep duration (hours): <%= average_hours_slept ? average_hours_slept : "No data" %></p>
-<p>Average sleep quality (1=poor, 5=excellent): <%= average_sleep_quality ? average_sleep_quality : "No data" %></p>
+<p>Average sleep quality (1=very poor, 5=excellent): <%= average_sleep_quality ? average_sleep_quality : "No data" %></p>
 <p>Average time spent on sports and exercise (hours): <%= average_sports_time ? average_sports_time : "No data" %></p>
 <p>Average time spent studying (hours): <%= average_study_time ? average_study_time : "No data" %></p>
-<p>Average regularity and quality of eating (1=poor, 5=excellent): <%= average_eating_quality ? average_eating_quality : "No data" %></p>
-<p>Average generic mood for the whole day (1=poor, 5=excellent): <%= overall_average_mood? overall_average_mood : "No data" %></p>
-<p>Average generic mood for the morning (1=poor, 5=excellent): <%= overall_average_mood? overall_average_mood : "No data" %></p>
-<p>Average generic mood for the evening (1=poor, 5=excellent): <%= overall_average_mood ? overall_average_mood : "No data" %></p>
+<p>Average regularity and quality of eating (1=very poor, 5=excellent): <%= average_eating_quality ? average_eating_quality : "No data" %></p>
+<p>Average generic mood (1=very poor, 5=excellent): <%= overall_average_mood? overall_average_mood : "No data" %></p>
 <br>
 
 <h3>Change the week of the summary here</h3>

@@ -10,19 +10,12 @@
 <% 
 var d = new Date()
 
-var day = ''
-if(d.getDate() < 10 ) {
-    day = '0' + d.getDate() 
-} else {
-    day = d.getDate()
-}
-
-var month = ''
-if(d.getMonth() < 9 ) {
-    month = '0' + (d.getMonth() + 1) 
-} else {
-    month = (d.getMonth() + 1)
-}
+var day = d.getDate() < 10 
+          ? '0' + d.getDate() 
+          : d.getDate()
+var month = d.getMonth() < 9 
+          ? '0' + (d.getMonth() + 1) 
+          : (d.getMonth() + 1)
 //formatting
 var trueDate = d.getFullYear()+"-"+month+"-"+day
 
@@ -49,13 +42,13 @@ var errors = errors ? errors : []
     <input type="number" min="0" max="24" step="0.01" name="hours_slept" value="<%= hours_slept %>" />
     <br>
 
-    <label for="sleep_quality">Sleep quality: give a number from 1 to 5 with 1 being poor and 5 being excellent</label>
+    <label for="sleep_quality">Sleep quality: give a number from 1 to 5 with 1 being very poor and 5 being excellent</label>
     <br>1<input type="range" name="sleep_quality" min="1" max="5" step="1" value="<%= sleep_quality %>" />5</br>
 
-    <label for="mood">Generic mood: give a number from 1 to 5 with 1 being poor and 5 being excellent</label>
+    <label for="mood">Generic mood: give a number from 1 to 5 with 1 being very poor and 5 being excellent</label>
     <br>1<input type="range" name="mood" min="1" max="5" step="1" value="<%= mood %>" />5</br>
 
-    <input type="submit" value="submit all" />
+    <input type="submit" value="submit report" />
 
 </form>
 </div>

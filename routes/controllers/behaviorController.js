@@ -11,7 +11,6 @@ const getMorningReport = ({render}) => {
 };
 
 const postMorningReport = async({request, response, render, session}) => {
-  console.log('--- Morning report POST ---')
   const user = await session.get('user');
   const user_id = user.id
 
@@ -30,9 +29,6 @@ const postMorningReport = async({request, response, render, session}) => {
   data.sleep_quality = sleep_quality
   data.mood = mood
 
-  console.log("Got following data")
-  console.log(data)
-
   const validationRules = {
     date: [required, isDate],
     hours_slept: [required, isNumber, numberBetween(0,24)],
@@ -41,8 +37,6 @@ const postMorningReport = async({request, response, render, session}) => {
   }
 
   const [passes, errors] = await validate(data, validationRules)
-  console.log(passes)
-  console.log(errors)
 
   if (!passes) {
     render('morningView.ejs', {...data, errors: errors})
@@ -52,7 +46,6 @@ const postMorningReport = async({request, response, render, session}) => {
   const existingDate = await executeQuery("SELECT * FROM morning_reports WHERE date = $1 AND user_id = $2;", date, user_id)
   if (existingDate && existingDate.rowCount > 0) {
     // Update existing report
-    console.log("--- Update ---")
     await executeQuery("UPDATE morning_reports SET (hours_slept, sleep_quality, mood) = ($1, $2, $3) WHERE date = $4 AND user_id = $5;",
       hours_slept,
       sleep_quality,
@@ -61,12 +54,9 @@ const postMorningReport = async({request, response, render, session}) => {
       user_id
     );
     await session.set('msg', `Your morning report for the date '${date}' has been changed`)
-    //response.redirect('/')
   } else {
-  console.log("--- Insert ---")
   await executeQuery("INSERT INTO morning_reports (date, hours_slept, sleep_quality, mood, user_id) VALUES ($1, $2, $3, $4, $5);", date, hours_slept, sleep_quality, mood, user_id);
-  await session.set('msg', `Your morning report for the date '${date}' has been changed successfully`)
-  //response.redirect('/')
+  await session.set('msg', `Your morning report for the date '${date}' has been set successfully`)
   }
   response.redirect('/')
 }
@@ -76,13 +66,10 @@ const getEveningReport = ({render}) => {
 };
 
 const postEveningReport = async({request, response, render, session}) => {
-  console.log('--- Evening report POST ---')
   const user = await session.get('user');
   const user_id = user.id
   const body = request.body();
   const params = await body.value;
-  
-  //const user_id = 1
 
   const date = params.get('date')
   const sports_time = Number(params.get('sports_time'));
@@ -98,9 +85,6 @@ const postEveningReport = async({request, response, render, session}) => {
   data.eating = eating
   data.mood = mood
 
-  console.log("Got following data")
-  console.log(data)
-
   const validationRules = {
     date: [required, isDate],
     sports_time: [required, isNumber, numberBetween(0,24)],
@@ -110,8 +94,6 @@ const postEveningReport = async({request, response, render, session}) => {
   }
 
   const [passes, errors] = await validate(data, validationRules)
-  console.log(passes)
-  console.log(errors)
 
   if (!passes) {
     render('eveningView.ejs', {...data, errors: errors})
@@ -121,7 +103,6 @@ const postEveningReport = async({request, response, render, session}) => {
   const existingDate = await executeQuery("SELECT * FROM evening_reports WHERE date = $1 AND user_id = $2;", date, user_id)
   if (existingDate && existingDate.rowCount > 0) {
     // Update existing report
-    console.log("--- Update ---")
     await executeQuery("UPDATE evening_reports SET (sports_time, study_time, eating, mood) = ($1, $2, $3, $4) WHERE date = $5 AND user_id = $6;",
       sports_time,
       study_time,
@@ -132,12 +113,9 @@ const postEveningReport = async({request, response, render, session}) => {
     );
     console.log(user_id)
     await session.set('msg', `Your evening report for the date '${date}' has been changed`)
-   // response.redirect('/')
   } else {
-  console.log("--- Insert ---")
   await executeQuery("INSERT INTO evening_reports (date, sports_time, study_time, eating, mood, user_id) VALUES ($1, $2, $3, $4, $5, $6);", date, sports_time, study_time, eating, mood, user_id);
   await session.set('msg', `Your evening report for the date '${date}' has been set successfully`)
-  //response.redirect('/')
   }
   response.redirect('/')
 }

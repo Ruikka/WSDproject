@@ -18,7 +18,7 @@ const requestTimingMiddleware = async({ request, session }, next) => {
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
-  console.log(`${request.method} ${request.url.pathname} - ${ms} ms - ${userId} id`);
+  console.log(` method: ${request.method} -- path: ${request.url.pathname} -- start: ${start} -- request time: ${ms} ms -- id: ${userId}`);
   //logs also user id or anon is not authenitaceted
 }
 

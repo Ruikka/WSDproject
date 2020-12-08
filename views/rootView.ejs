@@ -18,8 +18,8 @@
 
     <h3>Personal quick summary</h3>
     <% if (average_mood_today && average_mood_yesterday) { %>
-      <p>Average mood for today (1=poor, 5=excellent): <%= average_mood_today %></p>
-      <p>Average mood for yesterday (1=poor, 5=excellent): <%= average_mood_yesterday %></p>
+      <p>Average mood for today (1=very poor, 5=excellent): <%= average_mood_today %></p>
+      <p>Average mood for yesterday (1=very poor, 5=excellent): <%= average_mood_yesterday %></p>
       <p><%= average_mood_yesterday > average_mood_today ? "Things are looking gloomy today" : "Things are looking bright today" %></p>
     <% } else { %>
       <p>Not enough data for a quick summary.</p>
