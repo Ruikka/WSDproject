@@ -16,7 +16,7 @@ export PORT=*your port, probably 7777 here*
 Then, launch the application in Git Bash with 
 
 ```
-source config.env`
+source config.env
 deno --unstable --allow-read --allow-net --allow-env app.js`
 ```
 
