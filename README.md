@@ -4,6 +4,8 @@ Application for self-monitoring
 
 ## Launching the server:
 
+This tutorial assumes the use of Deno and elephantSQL.
+
 First, create a file called "config.env" in the root file of the application structure with the following lines filled with the correct database and port information:
 
 ```
@@ -11,7 +13,7 @@ export DATABASE_URL=*your database URL here*`
 export PORT=*your port, probably 7777 here*
 ```
 
-Then, launch the application with 
+Then, launch the application in Git Bash with 
 
 ```
 source config.env`
