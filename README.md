@@ -4,7 +4,7 @@ Application for self-monitoring
 
 ## Launching the server:
 
-This tutorial assumes the use of Deno and elephantSQL.
+This tutorial assumes the use of Deno and databases in elephantSQL.
 
 First, create a file called "config.env" in the root file of the application structure with the following lines filled with the correct database and port information:
 
