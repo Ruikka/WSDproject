@@ -93,7 +93,7 @@ const postRegistration = async({request, response, render}) => {
   }
 
   if (!passes) {
-    render('registerview.ejs', {email: email, errors: errors});
+    render('registerView.ejs', {email: email, errors: errors});
     return
   }
   //must not store the plaintext password, hence hash
