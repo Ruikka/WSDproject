@@ -103,12 +103,7 @@ const postRegistration = async({request, response, render}) => {
 };
 
 const registrationSuccessful = async({render, session}) => {
-  const user = await session.get('user');
-  if(user) {
   render('registrationSuccessView.ejs');
-  } else {
-    render('loginView.ejs')
-  }
 };
 
 export {getLogin, getRegistration, postRegistration, postLogin, postLogout, registrationSuccessful}
