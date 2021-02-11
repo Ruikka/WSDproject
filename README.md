@@ -15,7 +15,7 @@ Then, launch the application with
 
 ```
 source config.env`
-deno --unstable --allow-read --allow-net --allow-env app.js`
+deno run --unstable --allow-read --allow-net --allow-env app.js`
 ```
 
 ## Preparing the databases
