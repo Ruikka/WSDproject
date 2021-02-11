@@ -2,7 +2,13 @@
 
 Application for self-monitoring
 
-## Launching the server:
+# Link to application:
+ 
+``
+http://wsdapp1.herokuapp.com/
+``
+
+## Launching the server locally:
 
 This tutorial assumes the use of Deno and databases in elephantSQL.
 
