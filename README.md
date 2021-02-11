@@ -5,7 +5,7 @@ Application for self-monitoring
 # Link to application:
  
 ``
-http://wsdapp1.herokuapp.com/
+https://wsdapp1.herokuapp.com/
 ``
 
 ## Launching the server locally:
