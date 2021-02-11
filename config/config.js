@@ -1,4 +1,4 @@
-let config = {};
+let config = { tls: {enforce: true}};
 
 if (Deno.env.get('TEST_ENVIRONMENT')) {
     config.database = {};
