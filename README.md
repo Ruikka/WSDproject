@@ -1,6 +1,6 @@
 # WSD-project
 
-Application for self-monitoring
+Application for self-monitoring. This application was a course project. In a nutshell, this application runs on the browser and it asks registered users for daily sleeping and eating quality, exercise and study time etc… It also shows a summary of the users data and reports general moods. 
 
 # Link to application:
  
